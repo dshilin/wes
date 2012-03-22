@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,7 +10,37 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110510080413) do
+ActiveRecord::Schema.define(:version => 20110606150524) do
+
+  create_table "ad_hoc_option_types", :force => true do |t|
+    t.integer  "product_id"
+    t.integer  "option_type_id"
+    t.string   "price_modifier_type"
+    t.boolean  "is_required",         :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "ad_hoc_option_values", :force => true do |t|
+    t.integer  "ad_hoc_option_type_id"
+    t.integer  "option_value_id"
+    t.decimal  "price_modifier",        :precision => 8, :scale => 2, :default => 0.0, :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "ad_hoc_option_values_line_items", :id => false, :force => true do |t|
+    t.integer  "line_item_id"
+    t.integer  "ad_hoc_option_value_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "ad_hoc_variant_exclusions", :force => true do |t|
+    t.integer  "product_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "addresses", :force => true do |t|
     t.string   "firstname"
@@ -110,6 +139,43 @@ ActiveRecord::Schema.define(:version => 20110510080413) do
     t.string   "gateway_payment_profile_id"
   end
 
+  create_table "customizable_product_options", :force => true do |t|
+    t.integer  "product_customization_type_id"
+    t.integer  "position"
+    t.string   "presentation",                                        :null => false
+    t.string   "name",                                                :null => false
+    t.string   "description"
+    t.string   "data_type",                     :default => "string"
+    t.boolean  "is_required",                   :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "customized_product_options", :force => true do |t|
+    t.integer  "product_customization_id"
+    t.integer  "customizable_product_option_id"
+    t.string   "value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "excluded_ad_hoc_option_values", :force => true do |t|
+    t.integer "ad_hoc_variant_exclusion_id"
+    t.integer "ad_hoc_option_value_id"
+  end
+
+  create_table "feedback_reviews", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "review_id",                 :null => false
+    t.integer  "rating",     :default => 0
+    t.text     "comment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "feedback_reviews", ["review_id"], :name => "index_feedback_reviews_on_review_id"
+  add_index "feedback_reviews", ["user_id"], :name => "index_feedback_reviews_on_user_id"
+
   create_table "gateways", :force => true do |t|
     t.string   "type"
     t.string   "name"
@@ -175,6 +241,7 @@ ActiveRecord::Schema.define(:version => 20110510080413) do
   create_table "option_types_prototypes", :id => false, :force => true do |t|
     t.integer "prototype_id"
     t.integer "option_type_id"
+    t.integer "position",       :default => 1
   end
 
   create_table "option_values", :force => true do |t|
@@ -184,6 +251,8 @@ ActiveRecord::Schema.define(:version => 20110510080413) do
     t.string   "presentation"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "sku"
+    t.decimal  "amount",         :precision => 10, :scale => 2, :default => 0.0
   end
 
   create_table "option_values_variants", :id => false, :force => true do |t|
@@ -274,6 +343,26 @@ ActiveRecord::Schema.define(:version => 20110510080413) do
 
   add_index "preferences", ["owner_id", "owner_type", "name", "group_id", "group_type"], :name => "ix_prefs_on_owner_attr_pref", :unique => true
 
+  create_table "product_customization_types", :force => true do |t|
+    t.string   "name"
+    t.string   "presentation"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "product_customization_types_products", :id => false, :force => true do |t|
+    t.integer "product_customization_type_id"
+    t.integer "product_id"
+  end
+
+  create_table "product_customizations", :force => true do |t|
+    t.integer  "line_item_id"
+    t.integer  "product_customization_type_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "product_groups", :force => true do |t|
     t.string "name"
     t.string "permalink"
@@ -316,7 +405,7 @@ ActiveRecord::Schema.define(:version => 20110510080413) do
   add_index "product_scopes", ["product_group_id"], :name => "index_product_scopes_on_product_group_id"
 
   create_table "products", :force => true do |t|
-    t.string   "name",                    :default => "",   :null => false
+    t.string   "name",                                                  :default => "",   :null => false
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -327,8 +416,10 @@ ActiveRecord::Schema.define(:version => 20110510080413) do
     t.datetime "deleted_at"
     t.string   "meta_description"
     t.string   "meta_keywords"
-    t.integer  "count_on_hand",           :default => 0,    :null => false
-    t.boolean  "export_to_yandex_market", :default => true, :null => false
+    t.integer  "count_on_hand",                                         :default => 0,    :null => false
+    t.boolean  "export_to_yandex_market",                               :default => true, :null => false
+    t.decimal  "avg_rating",              :precision => 7, :scale => 5, :default => 0.0,  :null => false
+    t.integer  "reviews_count",                                         :default => 0,    :null => false
   end
 
   add_index "products", ["available_on"], :name => "index_products_on_available_on"
@@ -403,6 +494,14 @@ ActiveRecord::Schema.define(:version => 20110510080413) do
     t.datetime "updated_at"
   end
 
+  create_table "ratings", :force => true do |t|
+    t.integer  "product_id"
+    t.decimal  "value",      :precision => 10, :scale => 0
+    t.integer  "count"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "return_authorizations", :force => true do |t|
     t.string   "number"
     t.decimal  "amount",     :precision => 8, :scale => 2, :default => 0.0, :null => false
@@ -411,6 +510,19 @@ ActiveRecord::Schema.define(:version => 20110510080413) do
     t.string   "state"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "reviews", :force => true do |t|
+    t.integer  "product_id"
+    t.string   "name"
+    t.string   "location"
+    t.integer  "rating"
+    t.string   "title"
+    t.text     "review"
+    t.boolean  "approved",   :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   create_table "roles", :force => true do |t|

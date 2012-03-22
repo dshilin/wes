@@ -39,5 +39,6 @@ gem 'spree_advanced_cart', :git => 'git://github.com/romul/spree_advanced_cart.g
 gem 'spree_editor', '0.50.1'
 gem 'synergy', :git => 'git://github.com/secoint/synergy.git', :branch => '0-60-stable'
 gem 'synergy_default_theme', '1.0.2'
+gem 'synergy_inventory_management', :git => 'git://github.com/secoint/synergy_inventory_management.git', :branch => '0-60'
 gem 'werdau_theme', :require => 'werdau_theme', :path => 'werdau_theme'
 

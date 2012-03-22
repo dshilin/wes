@@ -27,12 +27,26 @@ GIT
       synergy_russian (= 0.2.8)
 
 GIT
+  remote: git://github.com/secoint/synergy_inventory_management.git
+  revision: 486bf5819ecd92311a66424b4d9707d215dc02c7
+  branch: 0-60
+  specs:
+    synergy_inventory_management (0.2)
+      spree_core (>= 0.60.1)
+
+GIT
   remote: git://github.com/spree/spree_i18n.git
   revision: a185d160047ce54f07bd47f7d417d9e2681fbb07
   ref: a185d160047ce54f07bd47f7d417d9e2681fbb07
   specs:
     spree_i18n (1.0.0)
       spree_core (>= 0.30.0)
+
+PATH
+  remote: werdau_theme
+  specs:
+    werdau_theme (0.60.6)
+      spree_core (>= 0.60.6)
 
 GEM
   remote: http://rubygems.org/
@@ -264,4 +278,6 @@ DEPENDENCIES
   spree_i18n!
   synergy!
   synergy_default_theme (= 1.0.2)
+  synergy_inventory_management!
   unicorn
+  werdau_theme!
