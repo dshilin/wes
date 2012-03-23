@@ -1,0 +1,24 @@
+<fieldset id='shipping_method'>
+  <legend><%= t("shipping_method") %></legend>
+  <div class="inner">
+    <div id="methods">
+      <p class="field radios">
+        <% @order.rate_hash.reverse.each do |shipping_method| %>
+          <label>
+            <%= radio_button(:order, :shipping_method_id, shipping_method[:id], :checked => "checked") %>
+            <%= shipping_method[:name] %>
+          </label><br />
+        <% end %>
+      </p>
+    </div>
+    <div class="shipping-instructions-hints">
+		<p>Доставка осуществляется до подъезда <strong>на следующий день</strong> после оформления заказа. Стоимость доставки не включается в стоимость заказа.</p>
+    <p><%= check_box_tag "agree_delivery" %> <label for="agree_delivery">Согласен с <%= link_to "условиями доставки", "/delivery", :target => "_blank" %>.</label></p>
+	</div>
+  </div>
+</fieldset>
+
+<div class="form-buttons">
+  <input type="submit" id="btn_next" value="<%=t("save_and_continue") %>" disabled="disabled" />
+</div>
+
