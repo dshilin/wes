@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110606150524) do
+ActiveRecord::Schema.define(:version => 20110818091541) do
 
   create_table "ad_hoc_option_types", :force => true do |t|
     t.integer  "product_id"
@@ -655,8 +655,8 @@ ActiveRecord::Schema.define(:version => 20110606150524) do
     t.string   "persistence_token"
     t.string   "reset_password_token"
     t.string   "perishable_token"
-    t.integer  "sign_in_count",        :default => 0, :null => false
-    t.integer  "failed_attempts",      :default => 0, :null => false
+    t.integer  "sign_in_count",        :default => 0,     :null => false
+    t.integer  "failed_attempts",      :default => 0,     :null => false
     t.datetime "last_request_at"
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
@@ -669,6 +669,16 @@ ActiveRecord::Schema.define(:version => 20110606150524) do
     t.string   "unlock_token"
     t.datetime "locked_at"
     t.datetime "remember_created_at"
+    t.string   "recipient"
+    t.string   "juridical_address"
+    t.string   "inn"
+    t.string   "kpp"
+    t.string   "recipient_bank"
+    t.string   "settlement_acc"
+    t.string   "corr"
+    t.string   "bik"
+    t.boolean  "nds"
+    t.boolean  "juridical",            :default => false
   end
 
   add_index "users", ["persistence_token"], :name => "index_users_on_persistence_token"
