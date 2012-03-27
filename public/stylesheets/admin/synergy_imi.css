@@ -8,16 +8,24 @@
 
 #synergy_imi #taxonomy_tree {
   overflow: auto;
-  width: 200px;  
+  width: 200px;
 }
 
 #synergy_imi #products_list {
   margin: 28px 300px 0 250px;
 }
 
+#synergy_imi #products_list .toolbar {
+  margin-right: 20px;
+}
+
 #synergy_imi #products_actions {
   float: right;
   width: 250px;
+}
+
+#synergy_imi #listing_products {
+  width: 95%;
 }
 
 #synergy_imi .pagination {
@@ -42,5 +50,6 @@
 }
 
 #synergy_imi legend {
-  padding: 0 5px;  
+  padding: 0 5px;
 }
+
