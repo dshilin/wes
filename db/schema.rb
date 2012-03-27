@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110818091541) do
+ActiveRecord::Schema.define(:version => 20120327134418) do
 
   create_table "ad_hoc_option_types", :force => true do |t|
     t.integer  "product_id"
@@ -478,9 +478,11 @@ ActiveRecord::Schema.define(:version => 20110818091541) do
 
   create_table "properties", :force => true do |t|
     t.string   "name"
-    t.string   "presentation", :null => false
+    t.string   "presentation",                     :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "unit"
+    t.boolean  "use_in_filter", :default => false, :null => false
   end
 
   create_table "properties_prototypes", :id => false, :force => true do |t|
