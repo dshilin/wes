@@ -9,4 +9,3 @@ class ChangeUserJuridicalFields < ActiveRecord::Migration
     change_column :users, :inn, :integer
   end
 end
-

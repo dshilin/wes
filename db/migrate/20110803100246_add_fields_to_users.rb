@@ -25,4 +25,3 @@ class AddFieldsToUsers < ActiveRecord::Migration
     remove_column :users, :recipient
   end
 end
-

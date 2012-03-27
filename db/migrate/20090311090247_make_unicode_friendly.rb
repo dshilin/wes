@@ -46,4 +46,3 @@ class MakeUnicodeFriendly < ActiveRecord::Migration
   end
 
 end
-
