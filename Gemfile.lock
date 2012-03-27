@@ -1,13 +1,4 @@
 GIT
-  remote: git://github.com/romul/spree_advanced_cart.git
-  revision: 60df8595bce19b1a20e514318132cd813a52ae53
-  specs:
-    spree_advanced_cart (0.40.0)
-      spree_core (>= 0.40.0)
-      spree_promo (>= 0.40.0)
-      zip-code-info (>= 0.1.0)
-
-GIT
   remote: git://github.com/secoint/synergy.git
   revision: a1723e69d8ab4bf4ed551ba887d64e37aaefef5d
   branch: 0-60-stable
@@ -259,7 +250,6 @@ GEM
     warden (1.0.6)
       rack (>= 1.0)
     will_paginate (3.0.2)
-    zip-code-info (0.1.0)
 
 PLATFORMS
   ruby
@@ -272,7 +262,6 @@ DEPENDENCIES
   mysql2 (~> 0.2.7)
   rails (= 3.0.10)
   spree (~> 0.60.6)
-  spree_advanced_cart!
   spree_compare_products
   spree_editor (= 0.50.1)
   spree_i18n!

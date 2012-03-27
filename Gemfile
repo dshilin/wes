@@ -35,7 +35,7 @@ end
 gem 'spree', '~> 0.60.6'
 gem 'spree_i18n', :git => 'git://github.com/spree/spree_i18n.git', :ref => 'a185d160047ce54f07bd47f7d417d9e2681fbb07'
 gem 'spree_compare_products'
-gem 'spree_advanced_cart', :git => 'git://github.com/romul/spree_advanced_cart.git'
+#gem 'spree_advanced_cart', :git => 'git://github.com/romul/spree_advanced_cart.git'
 gem 'spree_editor', '0.50.1'
 gem 'synergy', :git => 'git://github.com/secoint/synergy.git', :branch => '0-60-stable'
 gem 'synergy_default_theme', '1.0.2'
