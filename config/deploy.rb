@@ -22,9 +22,9 @@ task :copy_database_config, roles => :app do
   db_config = "#{shared_path}/database.yml"
   run "cp #{db_config} #{release_path}/config/database.yml"
   run "ln -s #{shared_path}/assets #{release_path}/public/assets"
-#  run ["cd #{deploy_to}/current",
-#       "rvm use ree-1.8.7-2011.03 do bundle install --path ../../shared/gems"].join(" && ")
-#       "#{bundler} exec #{rake} werdau_theme:install"].join(" && ")
+  run ["cd #{deploy_to}/current",
+       "rvm use ree-1.8.7-2011.03 do bundle install --path ../../shared/gems",
+       "#{bundler} exec #{rake} werdau_theme:install"].join(" && ")
 end
 
 set :unicorn_conf, "/etc/unicorn/wesdev.snayp.rb"
